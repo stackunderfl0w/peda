@@ -87,6 +87,11 @@ def install_tmux():
         tmux_conf = f.read()
     backup_and_write_file('%s/.tmux.conf' % HOME, tmux_conf)
 
+def copy_qemu():
+    if not os.path.exists("%s/bin" % HOME):
+        os.makedirs("%s/bin" % HOME)
+    shutil.copyfile("%s/qemu-system-i386" % CS444_BASE,
+            "%s/bin/qemu-system-i386" % HOME)
 
 def main():
     clone()
@@ -96,7 +101,7 @@ def main():
     install_tmux()
     install_bash()
     install_vim()
-
+    copy_qemu()
 
 if __name__ == '__main__':
     main()
