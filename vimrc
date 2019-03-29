@@ -3,7 +3,7 @@ set t_Co=256
 set bg=dark
 set modeline
 
-call plug#begin('~/.cs444-vim/plugged')
+call plug#begin('~/.cs444/vim/plugged')
 " 80 line
 Plug 'vim-scripts/eighties.vim'
 Plug 'PreserveNoEOL'

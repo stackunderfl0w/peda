@@ -59,11 +59,11 @@ which `{pid}` is expanded with the process identifier of the target program.""",
             # divider
             'divider_fill_char_primary': {
                 'doc': 'Filler around the label for primary dividers',
-                'default': '─'
+                'default': '--'
             },
             'divider_fill_char_secondary': {
                 'doc': 'Filler around the label for secondary dividers',
-                'default': '─'
+                'default': '--'
             },
             'divider_fill_style_primary': {
                 'doc': 'Style for `divider_fill_char_primary`',
