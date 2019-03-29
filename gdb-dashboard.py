@@ -1,15 +1,11 @@
-#!/usr/bin/env python
-
 # GDB dashboard - Modular visual interface for GDB in Python.
 #
 # https://github.com/cyrus-and/gdb-dashboard
 
 import ast
-import fcntl
 import os
 import re
 import struct
-import termios
 import traceback
 import math
 
@@ -59,11 +55,11 @@ which `{pid}` is expanded with the process identifier of the target program.""",
             # divider
             'divider_fill_char_primary': {
                 'doc': 'Filler around the label for primary dividers',
-                'default': '--'
+                'default': '─'
             },
             'divider_fill_char_secondary': {
                 'doc': 'Filler around the label for secondary dividers',
-                'default': '--'
+                'default': '─'
             },
             'divider_fill_style_primary': {
                 'doc': 'Style for `divider_fill_char_primary`',
@@ -212,6 +208,7 @@ class Beautifier():
             return
         # attempt to set up Pygments
         try:
+            import pygments
             from pygments.lexers import get_lexer_for_filename
             from pygments.formatters import Terminal256Formatter
             self.formatter = Terminal256Formatter(style=R.syntax_highlighting)
@@ -432,10 +429,22 @@ class Dashboard(gdb.Command):
 
     @staticmethod
     def get_term_width(fd=1):  # defaults to the main terminal
-        # first 2 shorts (4 byte) of struct winsize
-        raw = fcntl.ioctl(fd, termios.TIOCGWINSZ, ' ' * 4)
-        height, width = struct.unpack('hh', raw)
-        return int(width)
+        if sys.platform == 'win32':
+            try:
+                import curses
+                # XXX always neglects the fd parameter
+                _, width = curses.initscr().getmaxyx()
+                curses.endwin()
+                return int(width)
+            except ImportError:
+                return 80  # hardcoded fallback value
+        else:
+            import termios
+            import fcntl
+            # first 2 shorts (4 byte) of struct winsize
+            raw = fcntl.ioctl(fd, termios.TIOCGWINSZ, ' ' * 4)
+            _, width = struct.unpack('hh', raw)
+            return int(width)
 
     @staticmethod
     def set_custom_prompt(dashboard):
@@ -1567,6 +1576,21 @@ class Expressions(Dashboard.Module):
             }
         }
 
+# XXX traceback line numbers in this Python block must be increased by 1
+end
+
+# Better GDB defaults ----------------------------------------------------------
+
+set history save
+set verbose off
+set print pretty on
+set print array off
+set print array-indexes on
+set python print-stack full
+
+# Start ------------------------------------------------------------------------
+
+python Dashboard.start()
 
 # ------------------------------------------------------------------------------
 # Copyright (c) 2015-2017 Andrea Cardaci <cyrus.and@gmail.com>
