@@ -46,7 +46,7 @@ def install_gdb():
     if not ask_intent("Do you want to install peda to ~/.gdbinit"):
         return
 
-    data = """
+    data = """set auto-load safe-path /
 source ~/.cs444/peda.py
 source ~/.cs444/gdb-dashboard.py
 set history save
@@ -55,9 +55,7 @@ set print pretty on
 set print array off
 set print array-indexes on
 set python print-stack full
-python Dashboard.start()
-set auto-load safe-path /
-    """
+python Dashboard.start()"""
     backup_and_write_file("%s/.gdbinit" % HOME, data)
 
 
@@ -92,8 +90,8 @@ def install_tmux():
 
 def main():
     clone()
-    print()
-    print()
+    print('')
+    print('')
     install_gdb()
     install_tmux()
     install_bash()
