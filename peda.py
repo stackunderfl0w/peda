@@ -753,7 +753,7 @@ class PEDA(object):
         if len(arg) == 1 and to_int(arg[0]) != None:
             arg += [to_hex(to_int(arg[0]) + 32)]
 
-        self.execute("set disassembly-flavor intel")
+        self.execute("set disassembly-flavor att")
         out = self.execute_redirect("disassemble %s %s" % (modif, ",".join(arg)))
         if not out:
             return None
@@ -6155,7 +6155,7 @@ peda.execute("set prompt \001%s\002" % red("\002gdb-peda$ \001")) # custom promp
 peda.execute("set height 0") # disable paging
 peda.execute("set history expansion on")
 peda.execute("set history save on") # enable history saving
-peda.execute("set disassembly-flavor intel")
+peda.execute("set disassembly-flavor att")
 peda.execute("set follow-fork-mode child")
 peda.execute("set backtrace past-main on")
 peda.execute("set step-mode on")
