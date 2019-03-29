@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # GDB dashboard - Modular visual interface for GDB in Python.
 #
 # https://github.com/cyrus-and/gdb-dashboard
@@ -1373,12 +1374,12 @@ class Memory(Dashboard.Module):
                 'action': self.watch,
                 'doc': 'Watch a memory region by address and length.\n'
                        'The length defaults to 16 byte.',
-                'complete': gdb.COMPLETE_EXPRESSION
+                'complete': gdb.COMPLETE_NONE
             },
             'unwatch': {
                 'action': self.unwatch,
                 'doc': 'Stop watching a memory region by address.',
-                'complete': gdb.COMPLETE_EXPRESSION
+                'complete': gdb.COMPLETE_NONE
             },
             'clear': {
                 'action': self.clear,
@@ -1563,12 +1564,12 @@ class Expressions(Dashboard.Module):
             'watch': {
                 'action': self.watch,
                 'doc': 'Watch an expression.',
-                'complete': gdb.COMPLETE_EXPRESSION
+                'complete': gdb.COMPLETE_NONE
             },
             'unwatch': {
                 'action': self.unwatch,
                 'doc': 'Stop watching an expression by id.',
-                'complete': gdb.COMPLETE_EXPRESSION
+                'complete': gdb.COMPLETE_NONE
             },
             'clear': {
                 'action': self.clear,
@@ -1577,20 +1578,7 @@ class Expressions(Dashboard.Module):
         }
 
 # XXX traceback line numbers in this Python block must be increased by 1
-end
 
-# Better GDB defaults ----------------------------------------------------------
-
-set history save
-set verbose off
-set print pretty on
-set print array off
-set print array-indexes on
-set python print-stack full
-
-# Start ------------------------------------------------------------------------
-
-python Dashboard.start()
 
 # ------------------------------------------------------------------------------
 # Copyright (c) 2015-2017 Andrea Cardaci <cyrus.and@gmail.com>

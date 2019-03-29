@@ -41,23 +41,12 @@ def clone():
         print("Cloning cs444 git repository has failed!")
         return
 
-
 def install_gdb():
     if not ask_intent("Do you want to install peda to ~/.gdbinit"):
         return
-
-    data = """set auto-load safe-path /
-source ~/.cs444/peda.py
-source ~/.cs444/gdb-dashboard.py
-set history save
-set verbose off
-set print pretty on
-set print array off
-set print array-indexes on
-set python print-stack full
-python Dashboard.start()"""
-    backup_and_write_file("%s/.gdbinit" % HOME, data)
-
+    with open("%s/gdbinit" % CS444_BASE,'rb') as f:
+        gdbinit = f.read()
+    backup_and_write_file('%s/.gdbinit' % HOME, gdbinit)
 
 def install_bash():
     if not ask_intent("Do you want to install .bashrc"):
@@ -66,7 +55,6 @@ def install_bash():
     with open("%s/bashrc" % CS444_BASE,'rb') as f:
         bashrc = f.read()
     backup_and_write_file('%s/.bashrc' % HOME, bashrc)
-
 
 def install_vim():
     if not ask_intent("Do you want to install .vimrc and vim plugins"):
@@ -77,7 +65,6 @@ def install_vim():
     backup_and_write_file('%s/.vimrc' % HOME, vimrc)
 
     os.system("vim +PlugInstall +qall")
-
 
 def install_tmux():
     if not ask_intent("Do you want to install cs444 custom tmux configuration"):
