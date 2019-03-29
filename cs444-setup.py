@@ -92,16 +92,17 @@ def copy_qemu():
         os.makedirs("%s/bin" % HOME)
     shutil.copyfile("%s/qemu-system-i386" % CS444_BASE,
             "%s/bin/qemu-system-i386" % HOME)
+    os.system("chmod +x %s/bin/qemu-system-i386" % HOME)
 
 def main():
     clone()
+    copy_qemu()
     print('')
     print('')
     install_gdb()
     install_tmux()
     install_bash()
     install_vim()
-    copy_qemu()
 
 if __name__ == '__main__':
     main()
