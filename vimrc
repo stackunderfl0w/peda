@@ -17,7 +17,7 @@ Plug 'kien/ctrlp.vim'
 call plug#end()
 
 
-colorscheme hybrid_material
+colorscheme angr
 
 set wildignore+=*.DS_Store
 set wildignore+=*.pyc
