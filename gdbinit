@@ -1,5 +1,4 @@
 set auto-load safe-path /
-source ~/.cs444/peda.py
 source ~/.cs444/gdb-dashboard.py
 set history save
 set verbose off
