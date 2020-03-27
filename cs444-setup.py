@@ -56,6 +56,14 @@ def install_bash():
         bashrc = f.read()
     backup_and_write_file('%s/.bashrc' % HOME, bashrc)
 
+    cshrc = None
+    with open("%s/.cshrc" % HOME, 'rb') as f:
+        cshrc = f.read()
+        if not 'exec /bin/bash' in cshrc:
+            cshrc += "\nexec /bin/bash\n"
+    if cshrc != None:
+        backup_and_write_file('%s/.cshrc' % HOME, cshrc)
+
 def install_vim():
     if not ask_intent("Do you want to install .vimrc and vim plugins"):
         return
