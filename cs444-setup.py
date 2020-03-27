@@ -75,11 +75,24 @@ def install_tmux():
     backup_and_write_file('%s/.tmux.conf' % HOME, tmux_conf)
 
 def copy_qemu():
+    copy_file_to_bin('qemu-system-i386')
+    copy_file_to_bin('kill-qemu')
+    copy_file_to_bin('kill-all-tmux')
+    copy_file_to_bin('ta-help')
+    #if not os.path.exists("%s/bin" % HOME):
+    #    os.makedirs("%s/bin" % HOME)
+    #shutil.copyfile("%s/qemu-system-i386" % CS444_BASE,
+    #        "%s/bin/qemu-system-i386" % HOME)
+    #os.system("chmod +x %s/bin/qemu-system-i386" % HOME)
+
+def copy_file_to_bin(name):
     if not os.path.exists("%s/bin" % HOME):
         os.makedirs("%s/bin" % HOME)
-    shutil.copyfile("%s/qemu-system-i386" % CS444_BASE,
-            "%s/bin/qemu-system-i386" % HOME)
-    os.system("chmod +x %s/bin/qemu-system-i386" % HOME)
+
+    shutil.copyfile("%s/%s" % (CS444_BASE, name),
+            "%s/bin/%s" % (HOME, name))
+    os.system("chmod +x %s/bin/%s" % (HOME, name))
+
 
 def main():
     clone()
