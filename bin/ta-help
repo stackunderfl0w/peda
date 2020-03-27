@@ -9,10 +9,10 @@ echo "Copy the following string to TA: $SESSION @ $SERVER"
 read -p "Press enter to continue..."
 
 # Run tmux to create UNIX socket
-tmux -S $SESSION -c ""
-# make it chmod 777
+tmux -S $SESSION new-session -d -s help
+# chmod 777
 chmod 777 $SESSION
-# re-run!
-tmux -S $SESSION
+# attach
+tmux -S $SESSION attach -t help
 # remove
 rm $SESSION

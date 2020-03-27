@@ -1,2 +1,2 @@
 #!/bin/bash
-tmux kill-server
+pkill -9 ^tmux
