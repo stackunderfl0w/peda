@@ -85,6 +85,8 @@ def install_tmux():
 def copy_qemu():
     copy_file_to_bin('qemu-system-i386')
     copy_file_to_bin('qemu-system-x86_64')
+    copy_file_to_bin('mmd')
+    copy_file_to_bin('mcopy')
     copy_file_to_bin('kill-qemu')
     copy_file_to_bin('kill-all-tmux')
     copy_file_to_bin('ta-help')
