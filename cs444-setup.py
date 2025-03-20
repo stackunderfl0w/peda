@@ -90,6 +90,7 @@ def copy_qemu():
     copy_file_to_bin('kill-qemu')
     copy_file_to_bin('kill-all-tmux')
     copy_file_to_bin('ta-help')
+    copy_file_to_bin('ctags')
 
 def copy_file_to_bin(name):
     if not os.path.exists(f"{HOME}/bin"):
