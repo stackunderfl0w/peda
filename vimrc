@@ -2,8 +2,8 @@ set nocompatible
 set t_Co=256
 set bg=dark
 set modeline
-so ~/.cs444/vim/autoload/plug.vim
-call plug#begin('~/.cs444/vim/plugged')
+so ~/.cs474/vim/autoload/plug.vim
+call plug#begin('~/.cs474/vim/plugged')
 " 80 line
 Plug 'vim-scripts/eighties.vim'
 Plug 'PreserveNoEOL'

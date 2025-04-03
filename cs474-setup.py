@@ -6,7 +6,7 @@ import shutil
 import subprocess
 
 HOME = os.getenv("HOME")
-CS444_BASE = f"{HOME}/.cs444"
+CS474_BASE = f"{HOME}/.cs474"
 
 def ask_intent(string):
     answer = 'z'
@@ -30,22 +30,22 @@ def backup_and_write_file(fn, data):
 
 def clone():
     os.system('git config --global core.autocrlf false')
-    if os.path.exists(CS444_BASE):
-        os.system(f"rm -rf {CS444_BASE}")
+    if os.path.exists(CS474_BASE):
+        os.system(f"rm -rf {CS474_BASE}")
     try:
-        r = os.system(f'git clone https://github.com/stackunderfl0w/peda {CS444_BASE}')
+        r = os.system(f'git clone https://github.com/stackunderfl0w/peda {CS474_BASE}')
     except:
-        print("Cloning cs444 git repository has failed!")
+        print("Cloning cs474 git repository has failed!")
         return
 
     if r != 0:
-        print("Cloning cs444 git repository has failed!")
+        print("Cloning cs474 git repository has failed!")
         return
 
 def install_gdb():
     if not ask_intent("Do you want to install peda to ~/.gdbinit"):
         return
-    with open(f"{CS444_BASE}/gdbinit", 'r') as f:
+    with open(f"{CS474_BASE}/gdbinit", 'r') as f:
         gdbinit = f.read()
     backup_and_write_file(f'{HOME}/.gdbinit', gdbinit)
 
@@ -53,7 +53,7 @@ def install_bash():
     if not ask_intent("Do you want to install .bashrc"):
         return
 
-    with open(f"{CS444_BASE}/bashrc", 'r') as f:
+    with open(f"{CS474_BASE}/bashrc", 'r') as f:
         bashrc = f.read()
     backup_and_write_file(f'{HOME}/.bashrc', bashrc)
 
@@ -68,17 +68,17 @@ def install_vim():
     if not ask_intent("Do you want to install .vimrc and vim plugins"):
         return
 
-    with open(f"{CS444_BASE}/vimrc", 'r') as f:
+    with open(f"{CS474_BASE}/vimrc", 'r') as f:
         vimrc = f.read()
     backup_and_write_file(f'{HOME}/.vimrc', vimrc)
 
     os.system("vim +PlugInstall +qall")
 
 def install_tmux():
-    if not ask_intent("Do you want to install cs444 custom tmux configuration"):
+    if not ask_intent("Do you want to install cs474 custom tmux configuration"):
         return
 
-    with open(f"{CS444_BASE}/tmux.conf", 'r') as f:
+    with open(f"{CS474_BASE}/tmux.conf", 'r') as f:
         tmux_conf = f.read()
     backup_and_write_file(f'{HOME}/.tmux.conf', tmux_conf)
 
@@ -96,7 +96,7 @@ def copy_file_to_bin(name):
     if not os.path.exists(f"{HOME}/bin"):
         os.makedirs(f"{HOME}/bin")
 
-    shutil.copyfile(f"{CS444_BASE}/bin/{name}", f"{HOME}/bin/{name}")
+    shutil.copyfile(f"{CS474_BASE}/bin/{name}", f"{HOME}/bin/{name}")
     os.system(f"chmod +x {HOME}/bin/{name}")
 
 def main():
