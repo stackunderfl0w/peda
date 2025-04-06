@@ -7,6 +7,8 @@ import subprocess
 
 HOME = os.getenv("HOME")
 CS474_BASE = f"{HOME}/.cs474"
+old=f"{HOME}/.cs444"
+
 
 def ask_intent(string):
     answer = 'z'
@@ -100,6 +102,12 @@ def copy_file_to_bin(name):
     os.system(f"chmod +x {HOME}/bin/{name}")
 
 def main():
+    if os.path.exists(old):
+        os.system(f"rm -rf {old}")
+
+    if os.path.exists(CS474_BASE):
+        os.system(f"rm -rf {CS474_BASE}")
+
     clone()
     copy_qemu()
     print('')
