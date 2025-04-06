@@ -1,5 +1,5 @@
 set auto-load safe-path /
-source ~/.cs444/gdb-dashboard.py
+source ~/.cs474/gdb-dashboard.py
 set history save
 set verbose off
 set print pretty on
